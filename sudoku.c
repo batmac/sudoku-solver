@@ -47,10 +47,10 @@ int main(int argc, char * argv[]) {
 
     printf("Working ...\n");
     rc_ = bt_ = 0;
-    resolvesudoku(b);
+    i = resolvesudoku(b);
     printf("(%dcalls[%d])\n", rc_,bt_);
 
-    return 0;
+    return (i == OMFG)?0:4;
 }
 
 
@@ -159,7 +159,7 @@ int resolvesudoku(char b[9][9]){
         }
     }
 
-    return 0; /* Nothing Found */
+    return -2; /* Nothing Found */
 }
 
 

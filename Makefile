@@ -1,10 +1,15 @@
 
 CFLAGS = -Wall -O3
 
-all : sudoku
+all: sudoku
 
-sudoku : sudoku.c
-	$(CC) $(CFLAGS) sudoku.c -o sudoku
+sudoku: sudoku.c
+	$(CC) $(CFLAGS) $^ -o $@
 
-clean :
+test: sudoku
+	./test/test.sh
+
+clean:
 	-rm -f sudoku
+
+.PHONY: all clean test

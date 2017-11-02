@@ -9,7 +9,10 @@ sudoku: sudoku.c
 test: sudoku
 	./test/test.sh
 
+lint: sudoku.c
+	cppcheck --error-exitcode=1 --enable=all $^
+
 clean:
 	-rm -f sudoku
 
-.PHONY: all clean test
+.PHONY: all clean test lint

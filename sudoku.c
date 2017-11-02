@@ -5,6 +5,8 @@
 
 #define OMFG (-42)
 
+/* int lint_test(){ int r; if (0) { return r; } } */
+
 void print_sudoku( char b[9][9], char und);
 int load_sudoku_from_file(const char * filename, char b[9][9]);
 int resolvesudoku(char b[9][9]);
@@ -75,8 +77,7 @@ void print_sudoku( char b[9][9], char und) {
 
 
 int load_sudoku_from_file(const char * filename, char b[9][9]) {
-    FILE * file = NULL;
-    int ret;
+    FILE * file;
     int i,j;
 
     file = fopen(filename, "r");
@@ -87,15 +88,18 @@ int load_sudoku_from_file(const char * filename, char b[9][9]) {
     printf("Parsing %s ...\n", filename);
 
     for(i=0; i<9; i++) {
+        int ret;
         ret = fscanf(file, "%c%c%c%c%c%c%c%c%c\n",
                      &b[i][0],&b[i][1],&b[i][2],&b[i][3],&b[i][4],
                      &b[i][5],&b[i][6],&b[i][7],&b[i][8]);
         if (ret!=9) {
             printf("KO, ret=%d", ret);
+	    fclose(file);
             return -1;
         }
         if (ret == EOF) {
             printf("EOF (%d)\n", ret);
+	    fclose(file);
             return -1;
         }
     }

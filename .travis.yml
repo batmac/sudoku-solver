@@ -7,7 +7,9 @@ addons:
     packages:
       - cppcheck
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cppcheck; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install cppcheck;
+    fi
 language: c
 compiler:
   - clang

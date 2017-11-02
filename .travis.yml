@@ -1,13 +1,20 @@
+---
 os:
   - linux
   - osx
+addons:
+  apt:
+    packages:
+      - cppcheck
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cppcheck; fi
 language: c
 compiler:
   - clang
   - gcc
 sudo: false
 script:
- - set -e
- - make lint
- - make 
- - make test
+  - set -e
+  - make lint
+  - make
+  - make test

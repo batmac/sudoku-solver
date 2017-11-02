@@ -1,7 +1,10 @@
-sudo: false
+os:
+  - linux
+  - osx
 language: c
 compiler:
   - clang
   - gcc
+sudo: false
 script:
  - make && make test

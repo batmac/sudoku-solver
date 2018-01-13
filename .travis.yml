@@ -17,6 +17,7 @@ compiler:
 sudo: false
 script:
   - set -e
+  - printenv
   - make lint
   - make
   - make test

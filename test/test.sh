@@ -24,10 +24,6 @@ if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
 	set -e
 	echo "TEST_PLATFORM => $TEST_PLATFORM"
 	unset TEST_PLATFORM
-	if ! type apt-get ; then
-		echo "apt-get not found"
-		exit 97
-	fi
 	cd "`dirname $0`/qemu-raspbian"
 	pwd
 	time make sync DIR=r FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-raspbian -v"

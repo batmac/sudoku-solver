@@ -3,7 +3,7 @@
 set -x
 [ -f last-test-ok ] && rm last-test-ok
 
-if [ "$TEST_PLATFORM" == "raspbian" ] ; then
+if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
 	set -e
 	echo '$TEST_PLATFORM' "$TEST_PLATFORM"
 	unset TEST_PLATFORM
@@ -13,12 +13,12 @@ if [ "$TEST_PLATFORM" == "raspbian" ] ; then
 	fi
 	cd "`dirname $0`/qemu-raspbian"
 	pwd
-	time make sync FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=raspbian -v"
+	time make sync FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-raspbian -v"
 	time make DIR=r
 	sudo chroot r /bin/sh -c 'cd tmp/*; pwd; make clean'
 	sudo chroot r /bin/sh -c 'cd tmp/*;make test'
 	if [ -f r/tmp/*/last-test-ok ] ;then
-		echo "raspbian test succeeded"
+		echo "qemu-raspbian test succeeded"
 		rm -f r/tmp/*/last-test-ok
 		exit 0
 	else

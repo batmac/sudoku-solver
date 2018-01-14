@@ -16,7 +16,7 @@ compiler:
   - gcc
 env:
   - TEST_PLATFORM=native
-  - TEST_PLATFORM=raspbian
+  - TEST_PLATFORM=qemu-raspbian
 sudo: required
 script:
   - set -e
@@ -26,6 +26,6 @@ script:
 matrix:
   exclude:
     - os: osx
-      env: TEST_PLATFORM=raspbian
+      env: TEST_PLATFORM=qemu-raspbian
     - compiler: clang
-      env: TEST_PLATFORM=raspbian
+      env: TEST_PLATFORM=qemu-raspbian

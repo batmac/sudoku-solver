@@ -12,7 +12,7 @@ gcc:
 clang:
 	$(MAKE) CC=clang
 
-test: sudoku
+test: sudoku.c
 	./test/test.sh
 
 lint: sudoku.c

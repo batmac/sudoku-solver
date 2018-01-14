@@ -20,14 +20,14 @@ if [ "$TEST_PLATFORM" == "raspbian" ] ; then
 	if [ -f r/tmp/*/last-test-ok ] ;then
 		echo "raspbian test succeeded"
 		rm -f r/tmp/*/last-test-ok
+		exit 0
 	else
 		exit 98
 	fi
-
 	exit 99
-
 fi
 	
+make
 ./sudoku test/false.txt ; r=$?; if [ $r != 255 ]; then echo ERROR $r; exit $r; fi
 ./sudoku test/false2.txt; r=$?; if [ $r != 4 ]; then echo ERROR $r; exit $r; fi
 ./sudoku test/valid.txt;  r=$?; if [ $r != 0 ]; then echo ERROR $r; exit $r; fi

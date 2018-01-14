@@ -5,7 +5,7 @@ set -x
 
 if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
 	set -e
-	echo '$TEST_PLATFORM' "$TEST_PLATFORM"
+	echo "TEST_PLATFORM => $TEST_PLATFORM"
 	unset TEST_PLATFORM
 	if ! type apt-get ; then
 		echo "apt-get not found"
@@ -13,7 +13,7 @@ if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
 	fi
 	cd "`dirname $0`/qemu-raspbian"
 	pwd
-	time make sync FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-raspbian -v"
+	time make sync DIR=r FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-raspbian -v"
 	time make DIR=r
 	sudo chroot r /bin/sh -c 'cd tmp/*; pwd; make clean'
 	sudo chroot r /bin/sh -c 'cd tmp/*;make test'

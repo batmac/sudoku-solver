@@ -14,10 +14,19 @@ language: c
 compiler:
   - clang
   - gcc
-sudo: false
+env:
+  - TEST_PLATFORM=native
+  - TEST_PLATFORM=raspbian
+sudo: required
 script:
   - set -e
   - printenv
   - make lint
   - make
   - make test
+matrix:
+  exclude:
+    - os: osx
+      env: TEST_PLATFORM=raspbian
+    - compiler: clang
+      env: TEST_PLATFORM=raspbian

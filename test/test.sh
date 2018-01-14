@@ -1,6 +1,14 @@
 #! /bin/bash
 
 set -x
+
+uname -a
+lsb_release -a
+cat /proc/cpuinfo
+free -m
+sysctl hw
+#sudo dmesg
+
 [ -f last-test-ok ] && rm last-test-ok
 
 if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then

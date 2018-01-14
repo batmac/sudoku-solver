@@ -17,7 +17,7 @@ echo
 #sudo dmesg
 echo
 
-[ -f last-test-ok ] && rm last-test-ok
+[ -f test/last-test-ok ] && rm test/last-test-ok
 [ -f test/env ] && source ./test/env
 
 if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
@@ -35,9 +35,9 @@ if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
 	echo "export CC=$CC" >> r/tmp/*/test/env
 	sudo chroot r /bin/sh -c 'cd tmp/*; pwd; make clean'
 	sudo chroot r /bin/sh -c 'cd tmp/*;make test'
-	if [ -f r/tmp/*/last-test-ok ] ;then
+	if [ -f r/tmp/*/test/last-test-ok ] ;then
 		echo "qemu-raspbian test succeeded"
-		rm -f r/tmp/*/last-test-ok
+		rm -f r/tmp/*/test/last-test-ok
 		exit 0
 	else
 		exit 98
@@ -51,5 +51,5 @@ make
 ./sudoku test/valid.txt;  r=$?; if [ $r != 0 ]; then echo ERROR $r; exit -1; fi
 echo
 echo OK
-touch last-test-ok
+touch test/last-test-ok
 exit 0

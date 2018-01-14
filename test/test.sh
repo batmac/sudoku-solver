@@ -6,6 +6,7 @@ set -x
 if [ "$TEST_PLATFORM" == "raspbian" ] ; then
 	set -e
 	echo '$TEST_PLATFORM' "$TEST_PLATFORM"
+	unset TEST_PLATFORM
 	if ! type apt-get ; then
 		echo "apt-get not found"
 		exit 97

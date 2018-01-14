@@ -2,12 +2,20 @@
 
 set -x
 
+printenv
+echo
 uname -a
+echo
 lsb_release -a
+echo
 cat /proc/cpuinfo
+echo
 free -m
+echo
 sysctl hw
+echo
 #sudo dmesg
+echo
 
 [ -f last-test-ok ] && rm last-test-ok
 

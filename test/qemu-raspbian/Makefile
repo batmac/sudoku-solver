@@ -5,7 +5,7 @@ CMD=uname -a
 FROM=/etc/debian_version
 TO=/tmp
 RSYNC_OPTIONS=-v
-PKGS=gcc,libc6-dev,make
+PKGS=gcc,clang,libc6-dev,make
 
 $(DIR)/chroot-done: $(SCRIPT_SETUP)
 	$(SUDO) ./$< \

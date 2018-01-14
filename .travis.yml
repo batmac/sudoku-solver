@@ -26,5 +26,3 @@ matrix:
   exclude:
     - os: osx
       env: TEST_PLATFORM=qemu-raspbian
-    - compiler: clang
-      env: TEST_PLATFORM=qemu-raspbian

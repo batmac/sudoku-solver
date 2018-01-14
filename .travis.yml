@@ -21,6 +21,9 @@ sudo: required
 script:
   - set -e
   - printenv
+  - cat /proc/cpuinfo || true
+  - lsb_release -a || true
+  - uname -a
   - make lint
   - make test
 matrix:

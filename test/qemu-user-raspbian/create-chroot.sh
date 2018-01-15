@@ -18,6 +18,7 @@ while getopts "ba:s:m:l:c:i:" opt; do
 		b)
 			type apt-get || die "apt-get not found."
 			apt-get install -q -y debootstrap binfmt-support qemu-user-static
+			update-binfmts --display
 			;;
 		a)
 			ARCH=$OPTARG

@@ -1,6 +1,8 @@
 #! /bin/bash
 
 set -x
+whoami
+echo
 date
 echo
 printenv
@@ -33,7 +35,8 @@ if [ "$TEST_PLATFORM" == "qemu-user-raspbian" ] ; then
 	time make DIR=chroot
 	echo "export CC=$CC" >> chroot/tmp/*/test/env
 	sudo chroot chroot /bin/sh -c 'cd tmp/*; pwd; make clean'
-	sudo chroot chroot /bin/sh -c 'cd tmp/*;make test'
+	sudo chroot chroot /bin/sh -c 'useradd testuser'
+	sudo chroot chroot /bin/sh -c 'su testuser -c /bin/sh -c "cd /tmp/*;make test"'
 	if [ -f chroot/tmp/*/test/last-test-ok ] ;then
 		echo "qemu-user-raspbian test succeeded"
 		rm -f chroot/tmp/*/test/last-test-ok

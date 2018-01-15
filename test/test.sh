@@ -17,6 +17,8 @@ sysctl hw
 echo
 #sudo dmesg
 echo
+df -h
+echo
 
 [ -f test/last-test-ok ] && rm test/last-test-ok
 

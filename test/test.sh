@@ -51,7 +51,9 @@ fi
 time make
 ./sudoku test/false.txt ; r=$?; if [ $r != 255 ]; then echo ERROR $r; exit -1; fi
 ./sudoku test/false2.txt; r=$?; if [ $r != 4 ]; then echo ERROR $r; exit -1; fi
+./sudoku test/easy.txt;   r=$?; if [ $r != 0 ]; then echo ERROR $r; exit -1; fi
 ./sudoku test/valid.txt;  r=$?; if [ $r != 0 ]; then echo ERROR $r; exit -1; fi
+./sudoku test/empty.txt;  r=$?; if [ $r != 0 ]; then echo ERROR $r; exit -1; fi
 echo
 echo OK
 touch test/last-test-ok

@@ -1,6 +1,5 @@
 SUDO=sudo
 DIR=r
-SCRIPT_SETUP=../create-chroot.sh
 CMD=uname -a
 FROM=/etc/debian_version
 TO=/tmp
@@ -10,15 +9,22 @@ ARCH=armhf
 SUITE=stretch
 MIRROR='http://mirrordirector.raspbian.org/raspbian'
 SOURCESLIST='deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi'
+BINDEPS_PKGS=debootstrap binfmt-support qemu-user-static
+BINDEPS_BIN=/usr/sbin/qemu-debootstrap
 
-$(DIR)/chroot-done: $(SCRIPT_SETUP)
+$(DIR)/chroot-done: $(BINDEPS_BIN)
+	[ -n "$(PKGS)" ] && INCLUDE_PKGS="--include=$(PKGS)"
 	$(SUDO) ./$< \
-		-b \
-		-a $(ARCH) \
-		-s $(SUITE) \
-		-m $(MIRROR) \
-		-l $(SOURCESLIST) \
-		-i $(PKGS) $(DIR)
+		--variant=minbase
+		-i $(PKGS) \
+		--arch=$(ARCH) \
+		$(SUITE) \
+		$(DIR) \
+		$(MIRROR) \
+
+bindeps:
+	apt-get install -q -y $(BINDEPS_PKGS)
+
 enter: $(DIR)/chroot-done
 	-$(SUDO) chroot $(DIR)
 exec: $(DIR)/chroot-done

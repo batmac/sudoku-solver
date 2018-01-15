@@ -23,19 +23,19 @@ echo
 [ -f test/last-test-ok ] && rm test/last-test-ok
 [ -f test/env ] && source ./test/env
 
-if [ "$TEST_PLATFORM" == "qemu-raspbian" ] ; then
+if [ "$TEST_PLATFORM" == "qemu-user-raspbian" ] ; then
 	set -e
 	echo "TEST_PLATFORM => $TEST_PLATFORM"
 	unset TEST_PLATFORM
-	cd "`dirname $0`/qemu-raspbian"
+	cd "`dirname $0`/qemu-user-raspbian"
 	pwd
-	time make sync DIR=chroot FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-raspbian -v"
+	time make sync DIR=chroot FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-user-raspbian -v"
 	time make DIR=chroot
 	echo "export CC=$CC" >> chroot/tmp/*/test/env
 	sudo chroot chroot /bin/sh -c 'cd tmp/*; pwd; make clean'
 	sudo chroot chroot /bin/sh -c 'cd tmp/*;make test'
 	if [ -f chroot/tmp/*/test/last-test-ok ] ;then
-		echo "qemu-raspbian test succeeded"
+		echo "qemu-user-raspbian test succeeded"
 		rm -f chroot/tmp/*/test/last-test-ok
 		exit 0
 	else

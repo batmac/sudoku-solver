@@ -20,8 +20,8 @@ enter: $(DIR)/chroot-done
 exec: $(DIR)/chroot-done
 	-$(SUDO) chroot $(DIR) $(CMD)
 sync:
-	mkdir -p $(DIR)
-	rsync -aH $(RSYNC_OPTIONS) $(FROM) $(DIR)/$(TO)
+	$(SUDO) mkdir -p $(DIR)
+	$(SUDO) rsync -aH $(RSYNC_OPTIONS) $(FROM) $(DIR)/$(TO)
 mount:
 	$(SUDO) mount --bind /sys $(DIR)/sys
 	$(SUDO) mount --bind /dev $(DIR)/dev

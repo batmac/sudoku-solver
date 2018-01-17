@@ -31,6 +31,7 @@ if [ "$TEST_PLATFORM" == "qemu-user-raspbian" ] ; then
 	unset TEST_PLATFORM
 	cd "`dirname $0`/qemu-user-raspbian"
 	pwd
+	[ -z "$CC" ] && export CC=cc
 	time make sync DIR=chroot FROM="`git rev-parse --show-toplevel`" TO="/tmp/" RSYNC_OPTIONS="--exclude=.git --exclude=qemu-user-raspbian -v"
 	time make DIR=chroot
 	echo "export CC=$CC" >> chroot/tmp/*/test/env

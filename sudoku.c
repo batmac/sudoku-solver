@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 
 #define OMFG (-42)
@@ -129,12 +130,12 @@ int resolvesudoku(char b[9][9]){
 
     rc_++;
     /*copie du tableau*/
-    /*     memcpy(*b1,*b,9*9); */
-    for (i=0; i<9; i++) {
-        for (j=0; j<9; j++) {
-            b1[i][j]=b[i][j] ;
-        }
-    }
+	memcpy(*b1,*b,9*9);
+    /* for (i=0; i<9; i++) { */
+        /* for (j=0; j<9; j++) { */
+            /* b1[i][j]=b[i][j] ; */
+        /* } */
+    /* } */
     /* on cherche le premier element nul*/
     for (i=0; i<9  ; i++) {
         for (j=0; j<9 ; j++) {

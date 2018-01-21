@@ -6,6 +6,12 @@ all: sudoku
 sudoku: sudoku.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+sudoku-dbg: sudoku.c
+	$(CC) $(CFLAGS) -g $^ -o $@
+
+sudoku-afl: sudoku.c
+	afl-$(CC) $(CFLAGS) $^ -o $@
+
 gcc:
 	$(MAKE) CC=gcc
 
@@ -19,6 +25,6 @@ lint: sudoku.c
 	cppcheck --error-exitcode=1 --enable=all $^
 
 clean:
-	-$(RM) sudoku
+	-$(RM) sudoku sudoku-*
 
-.PHONY: all clean test lint gcc clang
+.PHONY: all clean test lint gcc clang debug afl

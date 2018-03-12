@@ -1,5 +1,6 @@
 #CC = /Volumes/ct-ng/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-gcc
-CFLAGS = -Wall -O3 -march=native
+CFLAGS = -Wall -O3
+CC=gcc
 
 all: sudoku
 

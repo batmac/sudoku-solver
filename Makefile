@@ -27,6 +27,6 @@ lint: sudoku.c
 	cppcheck --error-exitcode=1 --enable=all $^
 
 clean:
-	-$(RM) sudoku sudoku-*
+	-$(RM) -rf sudoku sudoku-*
 
 .PHONY: all clean test lint gcc clang

@@ -23,7 +23,7 @@ env:
   - TEST_PLATFORM=qemu-user-raspbian
 script:
   - set -e
-  - make lint
+    #  - make lint
   - make test
 matrix:
   exclude:

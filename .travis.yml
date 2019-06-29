@@ -21,7 +21,6 @@ compiler:
 env:
   - TEST_PLATFORM=native
   - TEST_PLATFORM=qemu-user-raspbian
-sudo: required
 script:
   - set -e
   - make lint

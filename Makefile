@@ -25,6 +25,7 @@ test: sudoku.c
 	./test/test.sh
 
 lint: sudoku.c
+	cppcheck --version
 	cppcheck --error-exitcode=1 --enable=all $^
 
 clean:

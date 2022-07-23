@@ -19,6 +19,8 @@ int constraint_regio(char b[9][9], int x, int y);
 int rc_;
 int bt_;
 
+volatile int cancel = 0;
+
 int main(int argc, char * argv[]) {
 
     int i,j;
@@ -147,22 +149,28 @@ int resolvesudoku(char b[9][9]){
         if (m==1) break;
     }
     if (i == 9 || j ==9 ) {
-        printf(">_> <_< O_O ");
-        printf("%d][%d\n",i,j);
-        print_sudoku(b,'.');
+        if (!cancel) {
+            printf(">_> <_< O_O ");
+            printf("%d][%d\n",i,j);
+            print_sudoku(b,'.');
+        }
+        cancel = 1;
         return OMFG;
     }
 
+#pragma omp parallel for shared(cancel)
     for(k=1; k<=9; k++) {
         b1[i][j] = k;
         if (!constraints(b1, i, j)) {
-            if (OMFG == resolvesudoku(b1)) 
-                return OMFG;
+            if (cancel || (OMFG == resolvesudoku(b1))) {
+                /* return OMFG; */
+        }
             else {
                 bt_++;
             }
         }
     }
+    if (cancel) return OMFG;
 
     return -2; /* Nothing Found */
 }

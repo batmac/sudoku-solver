@@ -1,18 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
-include(CheckLanguage)
-check_language(C)
 project(sudoku LANGUAGES C)
-enable_language(C)
 add_compile_options(-Wall -Wextra -pedantic)
 
-# list(APPEND CMAKE_PREFIX_PATH /opt/homebrew/opt/libomp /usr/local /opt /usr/homebrew /opt/homebrew)
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT ipo OUTPUT ipo_output)
-
 if(ipo)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
     message(STATUS "IPO is supported.")

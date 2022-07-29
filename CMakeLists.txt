@@ -8,6 +8,7 @@ endif()
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT ipo OUTPUT ipo_output)
+
 if(ipo)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
     message(STATUS "IPO is supported.")
